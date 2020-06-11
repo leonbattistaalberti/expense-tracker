@@ -1,0 +1,10 @@
+.IncomeExpenses {
+  display: flex;
+  flex-direction: row;
+}
+
+.IncomeExpenses__income {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
