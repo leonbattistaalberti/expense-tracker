@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
+import Transaction from "../components/Transaction";
 
 const TransactionList = () => {
+  const { transactions } = useContext(GlobalContext);
+
   return (
     <div className="container">
-      <h3 className="display-3">History</h3>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-primary">
-          A simple primary list group item
-        </li>
+      <h5 className="display-5">Transactions</h5>
+      <ul className="list-group">
+        {transactions.map((transaction) => {
+          return <Transaction transaction={transaction} key={transaction.id} />;
+        })}
       </ul>
     </div>
   );
@@ -15,24 +19,24 @@ const TransactionList = () => {
 
 export default TransactionList;
 
-// <li class="list-group-item list-group-item-secondary">
+// <li className="list-group-item list-group-item-secondary">
 //   A simple secondary list group item
 // </li>
-// <li class="list-group-item list-group-item-success">
+// <li className="list-group-item list-group-item-success">
 //   A simple success list group item
 // </li>
-// <li class="list-group-item list-group-item-danger">
+// <li className="list-group-item list-group-item-danger">
 //   A simple danger list group item
 // </li>
-// <li class="list-group-item list-group-item-warning">
+// <li className="list-group-item list-group-item-warning">
 //   A simple warning list group item
 // </li>
-// <li class="list-group-item list-group-item-info">
+// <li className="list-group-item list-group-item-info">
 //   A simple info list group item
 // </li>
-// <li class="list-group-item list-group-item-light">
+// <li className="list-group-item list-group-item-light">
 //   A simple light list group item
 // </li>
-// <li class="list-group-item list-group-item-dark">
+// <li className="list-group-item list-group-item-dark">
 //   A simple dark list group item
 // </li>
