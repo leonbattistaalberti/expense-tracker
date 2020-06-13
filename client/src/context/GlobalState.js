@@ -3,7 +3,6 @@ import axios from "axios";
 
 /**
  * @desc App Reducer
- * @param object
  */
 const AppReducer = (state, action) => {
   switch (action.type) {
@@ -17,7 +16,7 @@ const AppReducer = (state, action) => {
       return {
         ...state,
         transactions: state.transactions.filter(
-          (transaction) => transaction.id !== action.payload
+          (transaction) => transaction._id !== action.payload
         ),
       };
     case "ADD_TRANSACTION":
@@ -67,19 +66,40 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  function deleteTransaction(id) {
-    dispatch({
-      type: "DELETE_TRANSACTION",
-      payload: id,
-    });
+  async function deleteTransaction(id) {
+    try {
+      await axios.delete(`/api/v1/transactions/${id}`);
+      dispatch({
+        type: "DELETE_TRANSACTION",
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TRANSACTION_ERROR",
+        payload: err.response.data.error,
+      });
+    }
   }
 
-  function addTransaction(newTransaction) {
+  async function addTransaction(newTransaction) {
     console.log(newTransaction);
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: newTransaction,
-    });
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+    };
+    try {
+      const res = axios.post("/api/v1/transactions", newTransaction, config);
+      dispatch({
+        type: "ADD_TRANSACTION",
+        payload: res.data.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TRANSACTION_ERROR",
+        payload: err.response.data.error,
+      });
+    }
   }
 
   return (
