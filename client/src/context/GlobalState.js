@@ -22,12 +22,7 @@ const AppReducer = (state, action) => {
 // Initial state
 
 const initialState = {
-  transactions: [
-    { id: 1, text: "books", amount: -20 },
-    { id: 2, text: "some more books", amount: -30 },
-    { id: 3, text: "even some more books", amount: -50 },
-    { id: 4, text: "Pay", amount: 1000 },
-  ],
+  transactions: [],
 };
 
 // Create context

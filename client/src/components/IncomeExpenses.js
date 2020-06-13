@@ -14,24 +14,24 @@ const IncomeExpenses = () => {
   ).toFixed(2);
 
   return (
-    <div classNameName="container">
-      <div classNameName="row">
-        <div classNameName="col-sm">
+    <div className="container">
+      <div className="row">
+        <div className="col-sm">
           <div>
-            <div classNameName="card">
-              <div classNameName="card-body">
-                <h5 classNameName="card-title">Income</h5>
-                <p classNameName="card-text">${income} </p>
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Income</h5>
+                <p className="card-text">${income} </p>
               </div>
             </div>
           </div>
         </div>
-        <div classNameName="col-sm">
+        <div className="col-sm">
           <div>
-            <div classNameName="card">
-              <div classNameName="card-body">
-                <h5 classNameName="card-title">Expenses</h5>
-                <p classNameName="card-text">${expense} </p>
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Expenses</h5>
+                <p className="card-text">${expense} </p>
               </div>
             </div>
           </div>

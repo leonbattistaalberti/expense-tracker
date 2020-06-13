@@ -20,8 +20,8 @@ const AddTransaction = () => {
 
   return (
     <div>
-      <form onSubmit={formHandler}>
-        <div classNameName="form-group">
+      <form>
+        <div className="form-group">
           <label htmlFor="text">Add Transaction</label>
           <input
             type="text"
@@ -30,7 +30,7 @@ const AddTransaction = () => {
             onChange={(e) => setText(e.target.value)}
           />
         </div>
-        <div classNameName="form-group">
+        <div className="form-group">
           <input
             type="number"
             placeholder="Amount"

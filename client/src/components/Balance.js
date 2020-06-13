@@ -9,8 +9,8 @@ const Balance = () => {
   let sign = total < 0 ? "-" : "+";
   return (
     <>
-      <h4 classNameName="display-4">Balance</h4>
-      <p classNameName="display-5">
+      <h4 className="display-4">Balance</h4>
+      <p className="display-5">
         {sign}${total}
       </p>
     </>
