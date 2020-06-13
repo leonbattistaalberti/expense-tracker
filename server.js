@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const colors = require("colors");
@@ -16,6 +17,21 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
+}
+
+/**
+ * // TODO: FIX
+ *
+ * @param  {type} process.env.NODE_ENV === "production" description
+ * @return {type}                                       description
+ */
+if (process.env.NODE_ENV === "production") {
+  // static folder
+  app.use(express.static("client/build"));
+  // get index.html from the client/build folder
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
 }
 
 app.use("/api/v1/transactions", transactions);
