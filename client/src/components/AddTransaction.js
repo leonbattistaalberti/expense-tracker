@@ -18,6 +18,10 @@ const AddTransaction = () => {
     addTransaction(newTransaction);
   };
 
+  // const inputHandler = () => {
+  //
+  // }
+
   return (
     <div>
       <form>
