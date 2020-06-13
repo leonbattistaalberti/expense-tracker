@@ -1,7 +1,18 @@
 import React, { createContext, useReducer } from "react";
+import axios from "axios";
 
+/**
+ * @desc App Reducer
+ * @param object
+ */
 const AppReducer = (state, action) => {
   switch (action.type) {
+    case "GET_TRANSACTIONS":
+      return {
+        ...state,
+        transactions: action.payload,
+        loading: false,
+      };
     case "DELETE_TRANSACTION":
       return {
         ...state,
@@ -14,6 +25,12 @@ const AppReducer = (state, action) => {
         ...state,
         transactions: [...state.transactions, action.payload],
       };
+    case "TRANSACTION_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }
@@ -23,6 +40,8 @@ const AppReducer = (state, action) => {
 
 const initialState = {
   transactions: [],
+  loading: true,
+  error: [],
 };
 
 // Create context
@@ -33,6 +52,21 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
+  async function getTransaction() {
+    try {
+      const res = await axios.get("/api/v1/transactions");
+      dispatch({
+        type: "GET_TRANSACTIONS",
+        payload: res.data.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TRANSACTION_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
   function deleteTransaction(id) {
     dispatch({
       type: "DELETE_TRANSACTION",
@@ -52,8 +86,10 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         transactions: state.transactions,
+        getTransaction,
         deleteTransaction,
         addTransaction,
+        error: state.error,
       }}
     >
       {children}
